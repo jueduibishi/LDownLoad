@@ -229,6 +229,18 @@ extension String {
                 return digest.map { String(format: "%02hhx", $0) }.joined()
         }
     }
+    /// 类似宏定义print，如: "打印".LPrint()
+    /// - Parameters:
+    ///   - itmes: 输出的对象
+    ///   - classString: 当前类
+    ///   - funcString: 方法名
+    ///   - line: 第几行
+    func LPrint(_ itmes:Any..., classString: String = #file,funcString: String = #function, line: Int = #line) {
+#if DEBUG
+       print("\(URL(fileURLWithPath: classString).lastPathComponent):方法:\(funcString)\(line)行:\(Date.nowDateString())------L------\n", self,"\n",itmes)
+#else
+#endif
+   }
     //MARK: emoji
     /// 是否为单个emoji表情
     var isSingleEmoji: Bool {
